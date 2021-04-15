@@ -269,7 +269,7 @@ class Game():
 
     def less_than_price(self, price:int) -> [dict]:
         '''
-        returns a list of dict objects where price is >= price, empty list if none found
+        returns a list of dict objects where price is <= game_price, empty list if none found
 
         Parameters
         ----------
