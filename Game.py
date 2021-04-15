@@ -7,7 +7,7 @@ GAME_URL = 'https://gg.deals'
 
 class Game():
     '''
-    A class to that represents scrapped data for a searched game
+    A class that represents scrapped data for a searched game
 
     Attributes
     -----------
@@ -77,8 +77,8 @@ class Game():
     
     def search(self, game_name:str) -> tuple:
         '''
-        Given the game name, returns a tuple of (True, Game) if search was succesful
-        returns (False, Game) if search was not succesful
+        Given the game name, returns a tuple of (True, Game) if search was successful
+        returns (False, Game) if search was not successful
         
         Parameters
         ----------
@@ -233,7 +233,7 @@ class Game():
     @property
     def link_to_lowest_price(self) -> str:
         '''
-        returns the link of the game with the lowest price
+        returns the link of the game with the lowest price 
         '''
         if self.found:
             return self.link
