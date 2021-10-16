@@ -98,9 +98,9 @@ class Game():
                 soup = BeautifulSoup(page,'html.parser')
 
                 # name of the game we found form the store, and the link to the game
-                self.name = ((soup.find('div','details')).find('a','ellipsis title').text.strip())
+                self.name = soup.find('a','title-inner').text.strip()
                 
-                link_to_game = soup.find('a','game-link')['href']
+                link_to_game = soup.find('a','title-inner')['href']
 
                 official_shop = requests.get(GAME_URL + link_to_game ).text
                 soup = BeautifulSoup(official_shop,'html.parser')
@@ -177,45 +177,6 @@ class Game():
 
         
         return(self.found, self)
-
-    
-    # left over function that may not be needed
-    # def search(self, game_name:str) -> tuple:
-    #     '''
-    #     Given the game_name:str, adds a Tiny link to go to the game page. 
-    #     Also, returns a tuple of True if the search was succesful, False if not successful.
-    #     The Game object is always returned with information if search was successful
-    #     '''
-    #     page = requests.get(SEARCH_URL+str(game_name))
-
-    #     if page.status_code == 200:
-    #         try:
-    #             # get the inital page for the game
-    #             page = page.text
-
-    #             soup = BeautifulSoup(page,'html.parser')
-    #             self.name = ((soup.find('div','details')).find('a','ellipsis title').text.strip())
-                
-    #             link_to_game = soup.find('a','game-link')['href']
-
-    #             try:
-    #                 # after getting the intial page, scrape the game page itself
-    #                 page = requests.get(GAME_URL + link_to_game ).text
-    #                 soup = BeautifulSoup(page,'html.parser')
-
-    #                 self.shop = soup.find('a','shop-link').img['alt']
-    #                 self.price = soup.find('span','game-price-current').text.strip().replace('~','').replace('$','').split('\n')[0]
-    #                 self.link = requests.get('http://tinyurl.com/api-create.php?url='+str('https://gg.deals'+ soup.find('a','full-link')['href'])).text
-    #                 self.found = True
-
-    #                 return (True, self)
-
-    #             except Exception as e:
-    #                 print(f'when trying to scrape for the quick link for the game, an error occured\n{e}\n')
-    #                 return (False, None)
-    #         except Exception as e:
-    #             print(f'when trying to scrape for the game, an error occured\n{e}\n')
-    #             return (False, None)
     
     @property
     def list_shops(self) -> [dict]:
